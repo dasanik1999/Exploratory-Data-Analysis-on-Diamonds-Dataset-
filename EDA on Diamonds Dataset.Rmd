@@ -1,0 +1,399 @@
+---
+title: "Exploratory Data Analysis on Diamonds Dataset"
+output: html_notebook
+---
+
+```{r}
+library(ggplot2)
+library(tibble)
+library(dplyr)
+view(diamonds)
+```
+
+
+```{r}
+glimpse(diamonds)
+```
+
+
+```{r}
+summary(diamonds)
+```
+
+
+```{r}
+str(diamonds) # alt of 'glimpse'
+```
+
+
+```{r}
+skimr::skim(diamonds)
+```
+
+
+```{r}
+View(diamonds)
+```
+
+
+```{r}
+tail(diamonds)
+```
+
+
+# Visualize distributions
+
+## Categorical Variables
+```{r}
+ggplot(data = diamonds,mapping = aes(x = cut)) +
+  geom_bar() +
+  geom_text(stat="count",aes(label=..count..), vjust = -1) +
+  ylim(0, 25000) +
+  theme(text = element_text(size=14)) +
+  geom_bar(fill = 'darkorange3') +
+  labs(x = "Quality of the Cut",
+       y = "Diamonds Count",
+       title = "Quality of the Diamonds")
+```
+
+
+```{r}
+ggplot(data = diamonds,mapping = aes(x = color)) +
+  geom_bar() +
+  geom_text(stat="count",aes(label=..count..), vjust = -1) +
+  ylim(0, 15000) +
+  theme(text = element_text(size=14)) +
+  geom_bar(fill = 'darkblue') +
+  labs(x = "Color of the Diamonds",
+       y = "Diamonds Count",
+       title = " Color of the Diamonds")
+```
+
+```{r}
+ggplot(data = diamonds,mapping = aes(x = clarity)) +
+  geom_bar() +
+  geom_text(stat="count",aes(label=..count..), vjust = -1) +
+  ylim(0, 16000) +
+  theme(text = element_text(size=14)) +
+  geom_bar(fill = 'yellow') +
+  labs(x = "Clarity of Diamonds",
+       y = "Diamonds Count",
+       title = "Clarity of the Diamonds")
+```
+
+
+```{r}
+diamonds %>%
+  count(cut)
+```
+
+
+```{r}
+table(diamonds$cut)
+```
+
+
+```{r}
+unique(diamonds$cut)
+```
+
+
+```{r}
+levels(diamonds$clarity)
+```
+
+
+
+```{r}
+table(diamonds$cut, diamonds$clarity)
+```
+
+
+```{r}
+diamonds %>%
+  count(cut, color) %>%
+  arrange(desc(n))
+```
+
+
+
+```{r}
+ggplot(data = diamonds) +
+  geom_bar(mapping = aes(x = cut, fill = clarity), position = "dodge") +
+  theme(axis.text.x = element_text(angle = 45)) +
+  scale_fill_brewer(palette="YlOrRd") +
+  labs(title = "Bar Plot between Cut and Clarity") +
+  theme_bw()
+```
+
+
+```{r}
+ggplot(data = diamonds) +
+  geom_bar(mapping = aes(x = cut, fill = clarity), position = "dodge") +
+  labs(title = "Bar Plot between Cut and Clarity") +
+  coord_flip()
+```
+
+```{r}
+co_cl <- diamonds %>%
+  group_by(cut) %>%
+  count(clarity) %>%
+  mutate(percent = (n/sum(n)) * 100,
+         label = sprintf("%0.0f%%", percent))
+
+ggplot(data = diamonds) +
+  aes(x = cut, fill = clarity) +
+  geom_bar(position = "fill") +
+  geom_text(data=co_cl, aes(y=n,label=label),position=position_fill(vjust = 0.5),
+          size = 3) +
+  scale_fill_brewer(palette="GnBu") +
+  labs(y = "Proportion",
+       title = "Proportions of Clarity Within Cut")
+```
+
+```{r}
+row_pct <- diamonds %>%
+  group_by(cut) %>%
+  count(color) %>%
+  mutate(percent = (n/sum(n)) * 100,
+         label = sprintf("%0.0f%%", percent))
+ggplot(diamonds) + 
+  aes(x=cut,fill=clarity) + 
+  geom_bar(position="fill") +
+  geom_text(data=co_cl, aes(y=n,label=label),position=position_fill(vjust = 0.5), size = 3) + 
+  scale_fill_brewer(palette="Set3") +
+  ggtitle("Proportions of Color Within Cut")
+# In general, VS2 and SI1 tends to have the highest percentages for each cut.
+# But for the best clarity, IF has the smallest percentage for each cut.
+```
+
+
+```{r}
+co_cl <- diamonds %>%
+  group_by(cut) %>%
+  count(clarity) %>%
+  mutate(percent = (n/sum(n)) * 100,
+         label = sprintf("%0.0f%%", percent))
+
+ggplot(data = diamonds) +
+  aes(x = cut, fill = clarity) +
+  geom_bar(position = "fill") +
+  geom_text(data=co_cl, aes(y=n,label=label),position=position_fill(vjust = 0.5),
+          size = 3) +
+  scale_fill_brewer(palette="BuPu") +
+  labs(y = "Proportion",
+       title = "Proportions of Clarity Within Cut")
+
+```
+
+
+```{r}
+prop.table(table(diamonds$cut, diamonds$color))
+# To see the proportion of each pair 
+```
+
+
+```{r}
+ggplot(diamonds, aes(x = cut)) +
+  geom_bar() +
+  facet_wrap(~ clarity, strip.position = "top") +
+  theme_minimal()
+# The lowest clarity has some uniform distribution.
+```
+
+
+```{r}
+round(prop.table(table(diamonds$cut, diamonds$color))*100, 2)
+```
+
+
+## Continous Variable
+```{r}
+ggplot(data = diamonds) +
+  geom_histogram(mapping = aes(x = carat), binwidth = 0.5)
+```
+
+
+```{r}
+diamonds %>%
+  count(cut_width(carat, 0.5))
+# TO create the frequency distribution
+```
+
+
+
+```{r}
+smaller <- diamonds %>%
+  filter(carat < 3)
+
+ggplot(data = smaller) +
+  geom_histogram(mapping = aes(x= carat), binwidth = 0.01)
+
+```
+
+
+```{r}
+ggplot(data = smaller, mapping = aes(x = carat, color = cut)) +
+  geom_freqpoly(binwidth = 0.1)
+```
+
+
+```{r}
+ggplot(data =  smaller, mapping = aes(x =  carat)) +
+  geom_histogram(binwidth = 0.01)
+```
+
+
+```{r}
+ggplot(diamonds) +
+  geom_histogram(mapping = aes(x = y), binwidth = 0.5) +
+  labs(x = "Width of Diamonds",
+       y = "Diamonds Count",
+       title = "Histogram for the Width of the Diamonds") +
+  theme_minimal()
+```
+
+
+
+```{r}
+ggplot(diamonds) +
+  geom_histogram(mapping = aes(x = y), binwidth = 0.5) +
+  coord_cartesian(ylim = c(0, 50)) +
+   labs(x = "Width of Diamonds",
+       y = "Diamonds Count",
+       title = "Histogram for the Width of the Diamonds") +
+  theme_minimal()
+```
+
+
+
+```{r}
+diamonds %>%
+  filter(y < 3 | y > 20) %>%
+  select(price, x, y, z) %>%
+  arrange(y)
+```
+
+
+# Missing Values
+```{r}
+diamonds2 <- diamonds %>%
+  filter(between(y, 3, 20))
+
+ggplot(data = diamonds2) +
+  geom_histogram(mapping = aes(x = y), binwidth = 0.5)
+```
+
+
+
+```{r}
+diamonds %>%
+  mutate(y = ifelse(y < 3 | y > 20, NA, y)) %>%
+  ggplot(aes(x = x, y = y)) +
+  geom_point()
+```
+
+
+
+```{r}
+diamonds %>%
+  ggplot(aes(x = x, y = y)) +
+  geom_point()
+```
+
+
+# Covariation
+# Categorical vs Continuous
+```{r}
+ggplot(data = diamonds, aes(x = price)) +
+  geom_freqpoly(aes(color = cut), bindwidth = 500)
+```
+
+
+
+```{r}
+ggplot(data = diamonds) +
+  geom_bar(mapping = aes(x = cut))
+```
+
+# Density Plot
+```{r}
+ggplot(data = diamonds, aes(x = price)) +
+  geom_density(mapping = aes(fill = factor(cut)), binwidth = 500, alpha = 0.4)
+```
+
+
+### Box Plot
+```{r}
+ggplot(data = diamonds, aes(x = cut, y = price)) +
+  geom_boxplot(fill = "lightgreen") +
+  labs(title = "Box PLot for Cut vs Price") +
+  theme_minimal()
+```
+
+
+
+```{r}
+ggplot(data = diamonds, aes(x = cut, y = price)) +
+  geom_boxplot(fill = "skyblue") +
+  coord_flip()
+```
+
+
+# Categorical vs Categorical
+```{r}
+ggplot(data = diamonds) +
+  geom_count(mapping = aes(x = cut, y = color))
+```
+
+
+
+```{r}
+diamonds %>%
+  count(color, cut) %>%
+  ggplot(aes(x = color, y = cut)) +
+  geom_tile(aes(fill = n))
+```
+
+
+
+```{r}
+diamonds %>%
+  count(color, cut) %>%
+  ggplot(aes(x = color, y = cut)) +
+  geom_tile(aes(fill = desc(n)))
+```
+
+
+# Continuousvs Continuous
+```{r}
+ggplot(data = diamonds, aes(x = carat, y = price)) +
+  geom_point(alpha = (1/100)) +
+  geom_smooth(method = "lm")
+```
+
+
+
+```{r}
+ggplot(data = diamonds, aes(x = log(carat), y = log(price))) +
+  geom_point(alpha = (1/100)) +
+  geom_smooth(method = "lm")
+```
+
+
+
+```{r}
+ggplot(data = diamonds, aes(x = carat, y = price, color=cut)) +
+  geom_point(alpha = 0.05) +
+  geom_smooth()
+```
+
+
+
+
+```{r}
+ggplot(data = smaller, aes(x = log(carat), y = log(price))) +
+  geom_bin2d() +
+  geom_smooth(method = "lm")
+```
+
