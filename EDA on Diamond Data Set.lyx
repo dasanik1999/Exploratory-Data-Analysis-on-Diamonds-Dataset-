@@ -1,0 +1,4256 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{titling}
+\fancyhf{}               % Clear fancy header/footer
+\fancyhead[L]{\thedate}   % My name in Left footer
+\fancyhead[R]{\theauthor}
+\fancyfoot[C]{\thepage}  % Page number in Right footer
+
+\makeatletter
+\let\ps@plain\ps@fancy   % Plain page style = fancy page style
+\makeatother
+\end_preamble
+\use_default_options true
+\begin_modules
+knitr
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "tgcursor" "default"
+\font_math "auto" "auto"
+\font_default_family ttdefault
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize a4paper
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1.5cm
+\topmargin 1.5cm
+\rightmargin 1.5cm
+\bottommargin 1.5cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle fancy
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+
+\series bold
+Exploratory Data Analysis On Diamonds Data Set From ggplot2 Package
+\end_layout
+
+\begin_layout Author
+Anik Das
+\end_layout
+
+\begin_layout Date
+August 25, 2022
+\end_layout
+
+\begin_layout Subsection*
+Data Description :-
+\end_layout
+
+\begin_layout Standard
+For this project, we have the '
+\series bold
+diamonds
+\series default
+' dataset from ggplot2 package.This is a collection of the prices and other
+ attributes of almost 
+\series bold
+54,000 diamonds
+\series default
+.
+ The variables are as follows:
+\end_layout
+
+\begin_layout Subsection*
+Usage :-
+\end_layout
+
+\begin_layout Standard
+diamonds
+\end_layout
+
+\begin_layout Subsection*
+Format :-
+\end_layout
+
+\begin_layout Standard
+The following is the structure of the dataset :-
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="11" columns="2">
+<features islongtable="true" longtabularalignment="center">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\shape italic
+\size large
+Column
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\shape italic
+\size large
+Description
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+price
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+price in US dollars ($326 – $18,823)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+carat
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+weight of the diamond (0.2–5.01)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+cut
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+quality of the cut (Fair, Good, Very Good, Premium, Ideal)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+clarity
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+a measurement of how clear the diamond is (I1 (worst), SI2, 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+SI1, VS2, VS1, VVS2, VVS1, IF (best))
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+x
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+length in mm (0–10.74)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+y
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+width in mm (0–58.9)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+z
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+depth in mm (0–31.8)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+depth
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+total depth percentage = z / mean(x, y) = 2 * z / (x + y) (43–79)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+table
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+width of top of diamond relative to widest point (43–95)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Objecive :-
+\end_layout
+
+\begin_layout Standard
+Our objective is to perform dataset exploration using various types of data
+ visualization.
+\end_layout
+
+\begin_layout Subsection*
+Importing the Libraries :-
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<eval=F,comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+library(ggplot2)
+\end_layout
+
+\begin_layout Plain Layout
+
+library(tibble)
+\end_layout
+
+\begin_layout Plain Layout
+
+library(dplyr)
+\end_layout
+
+\begin_layout Plain Layout
+
+library(xtable)
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Short Description of Our Data :-
+\end_layout
+
+\begin_layout Standard
+After importing the libraries, the diamonds dataset that will be used will
+ be loaded.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,message=F,size=
+\begin_inset Quotes erd
+\end_inset
+
+small
+\begin_inset Quotes erd
+\end_inset
+
+>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+options(warn=-1)
+\end_layout
+
+\begin_layout Plain Layout
+
+library(ggplot2)
+\end_layout
+
+\begin_layout Plain Layout
+
+library(tibble)
+\end_layout
+
+\begin_layout Plain Layout
+
+library(dplyr)
+\end_layout
+
+\begin_layout Plain Layout
+
+glimpse(diamonds)
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So, from the above output, there are 
+\series bold
+53490 observations
+\series default
+ and 
+\series bold
+10 variables
+\series default
+.
+ Also, among the 10 variables, there are
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+7 continuous
+\series default
+ variables, and
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+3 categorical
+\series default
+(ordered) variables.
+\end_layout
+
+\begin_layout Subsection*
+Checking The Existance Of The Missing Values in The Data :-
+\end_layout
+
+\begin_layout Standard
+So, using 
+\shape italic
+is.na() 
+\shape default
+function, we get the number of missing values in our data set is
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+sum(is.na(diamonds))
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+i.e., there are no null values in this dataset.
+ However, there are some unusual data values for some columns.
+ In the follwing sectons, we will fix those columns before analysis performed.
+\end_layout
+
+\begin_layout Subsection*
+Visualize The Shape of The Distribution :-
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\shape italic
+\size large
+For Categrical Variables
+\end_layout
+
+\begin_layout Subsubsection*
+
+\size large
+Bar Chart
+\size default
+ for the Cut of the Diamonds :- 
+\end_layout
+
+\begin_layout Standard
+Now, we might be curious to see how the counts of cut are distributed.
+ So, to visualize it's distribution, we are to use bar chart.
+ Bar charts with categorical variables on the x axis and in the fill are
+ a common way to see a contingency table visually.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+library(ggplot2)
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds,mapping = aes(x = cut)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_bar() +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_text(stat="count",aes(label=..count..), vjust = -1) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  ylim(0, 25000) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme(text = element_text(size=14)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_bar(fill = 'darkorange3') +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(x = "Quality of the Cut",
+\end_layout
+
+\begin_layout Plain Layout
+
+       y = "Diamonds Count",
+\end_layout
+
+\begin_layout Plain Layout
+
+       title = "Quality of the Diamonds") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_bw()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+From the above bar chart, we can say that the 
+\series bold
+ideal 
+\series default
+cut is the most common and the 
+\series bold
+fair 
+\series default
+cut is less common one.
+\end_layout
+
+\begin_layout Subsubsection*
+
+\size large
+Bar Chart
+\size default
+ for the Color of the Diamonds :-
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+library(ggplot2)
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds,mapping = aes(x = color)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_bar() +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_text(stat="count",aes(label=..count..), vjust = -1) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  ylim(0, 15000) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme(text = element_text(size=14)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_bar(fill = 'darkblue') +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(x = "Color of the Diamonds",
+\end_layout
+
+\begin_layout Plain Layout
+
+       y = "Diamonds Count",
+\end_layout
+
+\begin_layout Plain Layout
+
+       title = "Color of the Diamonds") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_bw()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+
+\size large
+Bar Chart
+\size default
+ for the Clarity of the Diamonds :-
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+library(ggplot2)
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds,mapping = aes(x = clarity)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_bar() +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_text(stat="count",aes(label=..count..), vjust = -1) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  ylim(0, 16000) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme(text = element_text(size=14)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_bar(fill = 'yellow') +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(x = "Clarity of Diamonds",
+\end_layout
+
+\begin_layout Plain Layout
+
+       y = "Diamonds Count",
+\end_layout
+
+\begin_layout Plain Layout
+
+       title = "Clarity of the Diamonds") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_bw()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Different Levels of Cut
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+unique(diamonds$cut)
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So, the 
+\series bold
+fair 
+\series default
+cut is the worst kind and the 
+\series bold
+ideal 
+\series default
+cut is the best kind of diamond.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Different Levels of Clarity
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+levels(diamonds$clarity)
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Cut vs Clarity
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+diamonds %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  count(cut, clarity) %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  arrange(desc(n))
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+
+\size large
+Histogram
+\size default
+ : Grouping by Cut and Clarity
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_bar(mapping = aes(x = cut, fill = clarity), position = "dodge") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme(axis.text.x = element_text(angle = 45)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  scale_fill_brewer(palette="YlOrRd") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Histogram : Grouping by Cut and Clarity
+\begin_inset Quotes erd
+\end_inset
+
+) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_bw()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So, we have one categorical variable on the x-axis and other one within
+ each of the previous categorical variable.
+ Here, as diamonds become better in terms of cut, they, in general, become
+ more numerous.
+ However, within each cut, 
+\series bold
+SI1
+\series default
+ and 
+\series bold
+VS2 
+\series default
+are the most common and it does seem to be skewed towards lesser clarity.
+ So, we can say that as the clarity inreases, the rarity within the each
+ cut increases.
+\end_layout
+
+\begin_layout Subsubsection*
+Flipping the Coordinates
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_bar(mapping = aes(x = cut, fill = clarity), position = "dodge") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Histogram : Grouping by Cut and Clarity
+\begin_inset Quotes erd
+\end_inset
+
+) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  scale_fill_brewer(palette="YlOrRd") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  coord_flip() +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_bw()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+
+\size large
+Stacked bar plots
+\size default
+ : Cut vs Clarity
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+co_cl <- diamonds %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  group_by(cut) %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  count(clarity) %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  mutate(percent = (n/sum(n)) * 100,
+\end_layout
+
+\begin_layout Plain Layout
+
+         label = sprintf("%0.0f%%", percent))
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  aes(x = cut, fill = clarity) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_bar(position = "fill") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_text(data=co_cl, aes(y=n,label=label),position=position_fill(vjust
+ = 0.5),
+\end_layout
+
+\begin_layout Plain Layout
+
+          size = 3) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  scale_fill_brewer(palette="GnBu") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(y = "Proportion",
+\end_layout
+
+\begin_layout Plain Layout
+
+       title = "Proportions of Clarity Within Cut")
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In general, 
+\series bold
+VS2
+\series default
+ and 
+\series bold
+SI1
+\series default
+ tends to have the highest percentages for each cut.
+ But for the best clarity, 
+\series bold
+IF
+\series default
+ has the smallest percentage for each cut.
+\end_layout
+
+\begin_layout Subsubsection*
+Cross-tabulations : To observe percentage of each pair 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+round(prop.table(table(diamonds$cut, diamonds$clarity))*100, 2)
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+
+\size large
+Bar Chart
+\size default
+ of Cut for each Clarity : 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(diamonds, aes(x = cut)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_bar() +
+\end_layout
+
+\begin_layout Plain Layout
+
+  facet_wrap(~ clarity, strip.position = "top") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So, we notice that the lowest clarity 
+\series bold
+I1 
+\series default
+has a uniform distribution of cuts.
+ But for other levels of clarity, we can't such type of uniform distributions.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\shape italic
+\size large
+For Continuous Variables
+\end_layout
+
+\begin_layout Subsubsection*
+
+\size large
+Histogram
+\size default
+ for Carat :
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_histogram(mapping = aes(x = carat), binwidth = 0.5) +
+\end_layout
+
+\begin_layout Plain Layout
+
+   labs(title = "Histogram for Carat") +
+\end_layout
+
+\begin_layout Plain Layout
+
+   theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Diamond Frequency by Carat :
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+diamonds %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  count(cut_width(carat, 0.5))
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now, we filtering our dataset diamonds to visualize the shape of the distributio
+n for carat.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+smaller <- diamonds %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  filter(carat < 3)
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = smaller) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_histogram(mapping = aes(x= carat), binwidth = 0.1) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Histogram : Carat for smaller dataset
+\begin_inset Quotes erd
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, smaller is the dataset where we filter diamonds that have carat values
+ less than 3.
+ Actually, this is a smaller subset of the dataset.
+ Now, we have a more general distribution
+\end_layout
+
+\begin_layout Subsubsection*
+
+\size large
+Frequency Polygon
+\size default
+ : Carat vs Cut
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = smaller, mapping = aes(x = carat, color = cut)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_freqpoly(binwidth = 0.1) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Frequency Polygon for Carat vs Cut
+\begin_inset Quotes erd
+\end_inset
+
+) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, as carat approaches to 1, the count for the good cut diaminds increases
+ and then they drop off very quickly than the other cuts.
+\end_layout
+
+\begin_layout Subsubsection*
+Detecting the Outliers Using Histogram of Carat :
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data =  smaller, mapping = aes(x =  carat)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_histogram(binwidth = 0.01) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Histogram of Carat for Binwidth = 0.01
+\begin_inset Quotes erd
+\end_inset
+
+) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_bw()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the right tail, we see that there are some unusual values, which are
+ actually the outliers for the dataset.
+\end_layout
+
+\begin_layout Subsubsection*
+
+\size large
+Histogram
+\size default
+ for the Width of diamonds :
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(diamonds) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_histogram(mapping = aes(x = y), binwidth = 0.5) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(x = "Width of Diamonds",
+\end_layout
+
+\begin_layout Plain Layout
+
+       y = "Diamonds Count",
+\end_layout
+
+\begin_layout Plain Layout
+
+       title = "Histogram for the Width of the Diamonds") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is a very good example of why it is very important to deal with unusual
+ values, which are outliers.
+ Because, when we look into this, we see that they are skewed towards the
+ lower values.
+ But if we remove those values, it would be spread out across the left tail
+ and it would be a completely different distribution, maybe it is a actually
+ skewed towards the left.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(diamonds) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_histogram(mapping = aes(x = y), binwidth = 0.5) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  coord_cartesian(ylim = c(0, 50)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+   labs(x = "Width of Diamonds",
+\end_layout
+
+\begin_layout Plain Layout
+
+       y = "Diamonds Count",
+\end_layout
+
+\begin_layout Plain Layout
+
+       title = "Histogram for the Width of the Diamonds") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So, we want to zoom the y-axis to see if there are any value outside the
+ range of y (
+\series bold
+width
+\series default
+ of a diamond), which is (0,50).
+ Now, we notice that there are exactly 8 diaminds with 0 width, which is
+ actually absurd.
+ The reason is that they might either have not filled in or, they might
+ be so small that it just rounded.
+ So, for our analysis part, we have to decide what to do with these values.
+ Either we can remove those columns x, y and z for those rows or, we can
+ use different types of imputation methods, like hot deck imputation, cold
+ deck impuataion or, mean imputation etc.
+\end_layout
+
+\begin_layout Subsubsection*
+Table : Showing the Unusual Values :
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,comment=NA,results='asis'>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+library(xtable)
+\end_layout
+
+\begin_layout Plain Layout
+
+diamonds %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  filter(y < 3 | y > 20) %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  select(price, x, y, z) %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  arrange(y) %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  xtable()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Filtering the dataset :
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+diamonds2 <- diamonds %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  filter(between(y, 3, 20))
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds2) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_histogram(mapping = aes(x = y), binwidth = 0.5) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(x = "Width of Diamonds",
+\end_layout
+
+\begin_layout Plain Layout
+
+       y = "Diamonds Count",
+\end_layout
+
+\begin_layout Plain Layout
+
+       title = 
+\begin_inset Quotes eld
+\end_inset
+
+Histogram of Width of a Diamond between 3 and 20
+\begin_inset Quotes erd
+\end_inset
+
+) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+After removing those ouliers, now we are taking the diamonds, which have
+ y values, (i.e., width of a diamond) between 3 and 20.
+ We denote this new dataset by 
+\series bold
+diamonds2
+\series default
+.
+ So, we get the actual distribution of the 
+\series bold
+width
+\series default
+ of a diamond.
+ That's why this is a good decision to remove those outliers.
+\end_layout
+
+\begin_layout Subsubsection*
+
+\size large
+Scatter Plot
+\size default
+ between x (Length of a Diamond) and y (Width of a Diamond) :
+\end_layout
+
+\begin_layout Standard
+Now, we can replace values withmissing values
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+diamonds %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  ggplot(aes(x = x, y = y)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_point() + 
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(x = "Length of Diamonds",
+\end_layout
+
+\begin_layout Plain Layout
+
+       y = "Width of Diamonds",
+\end_layout
+
+\begin_layout Plain Layout
+
+       title = 
+\begin_inset Quotes eld
+\end_inset
+
+Scatter Plot between the Length and the Width of a Diamond)
+\begin_inset Quotes erd
+\end_inset
+
+) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+For the Modified Dataset :
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+diamonds %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  mutate(y = ifelse(y < 3 | y > 20, NA, y)) %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  ggplot(aes(x = x, y = y)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_point() + 
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(x = "Length of Diamonds",
+\end_layout
+
+\begin_layout Plain Layout
+
+       y = "Width of Diamonds",
+\end_layout
+
+\begin_layout Plain Layout
+
+       title = 
+\begin_inset Quotes eld
+\end_inset
+
+Scatter Plot between the Length and the Width of a Diamond)
+\begin_inset Quotes erd
+\end_inset
+
+) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The whole shape of the plot has completely changed.
+ In the previous plot, it's just looked like that there is not as deep of
+ a relationship between 
+\series bold
+x
+\series default
+ and 
+\series bold
+y
+\series default
+.
+ In the cuurent plot, where we omit those missing/unusual values, there
+ is almost direct correlation between 
+\series bold
+x
+\series default
+ and 
+\series bold
+y
+\series default
+.
+\end_layout
+
+\begin_layout Subsection*
+Covariation :-
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\shape italic
+\size large
+Categorical vs Continuous
+\end_layout
+
+\begin_layout Subsubsection*
+
+\size large
+Frequency Polygon
+\size default
+ : Cut vs Price
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,message=F,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+options(warn=-1)
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds, aes(x = price)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_freqpoly(aes(color = cut), bindwidth = 500) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Frequency Polygon for Cut vs Price
+\begin_inset Quotes erd
+\end_inset
+
+) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+From the above plot, we can discuss about the correlation between cut and
+ price.
+ For each cut, as the price increases, the number of times, i.e., the count
+ decreases.
+ But it is hard to see the difference in distribution because, overall accounts
+ differ so much.
+ In the right tail of the plot, there might be some interesting patterns.
+ But we can't see minor differeneces in this plot.
+\end_layout
+
+\begin_layout Subsubsection*
+
+\size large
+Density Plot
+\series bold
+\size default
+ : Cut vs Price
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds, aes(x = price)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_density(mapping = aes(fill = factor(cut)), binwidth = 500, alpha
+ = 0.4) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Density Plot for Cut vs Price
+\begin_inset Quotes erd
+\end_inset
+
+) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So, in the density plot, we basically standardizes the count so that the
+ area under each frequency polygon is one.
+ Here, among the top quality diamonds, their average prices are around the
+ 1000 dollar mark and the 
+\series bold
+fair
+\series default
+ cut has the highest average price, although it's a low quality cut class.
+ In reality, we expect that the higher the quality of the cut, the more
+ expensive the diamond would be.
+ But we notice that the lowest quality of cut in a diamond accounts for
+ the highest average price.
+\end_layout
+
+\begin_layout Subsubsection*
+
+\size large
+Box Plot
+\series bold
+\size default
+ : Cut vs Price
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds, aes(x = cut, y = price)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_boxplot(fill = "lightgreen") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = "Box PLot of Price, grouped by Color") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We know that the box plot are basically an alternative to display the distributi
+on of a continuous variable broken down by categorical variable.
+ So, for the 
+\series bold
+ideal
+\series default
+ cut, it is more skewed towards the lower values and it has a smaller spread.
+ Again the 
+\series bold
+premium
+\series default
+ cut has the higher spread in terms of price.
+ So, there is a larger range of prices for a 
+\series bold
+premium
+\series default
+ diamond than an 
+\series bold
+ideal
+\series default
+ diamond.
+ Also, the 
+\series bold
+ideal
+\series default
+ diamonds also tend to be cheaper and the 
+\series bold
+fair
+\series default
+ diamonds tend to be more expensive as it is further up the boxes.
+ If we notice that for the 
+\series bold
+fair
+\series default
+ diamonds, we may think that the distribution is skewed.
+ But in our box plot, we notice that the distribution of the 
+\series bold
+fair
+\series default
+ diamonds is far narrower.
+\end_layout
+
+\begin_layout Subsubsection*
+Flipping the Coordinates
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds, aes(x = cut, y = price)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_boxplot(fill = "skyblue") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  coord_flip() +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = "Box PLotbox plot of Price, grouped by Cut") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\shape italic
+\size large
+Categorical vs Categorical
+\end_layout
+
+\begin_layout Subsubsection*
+
+\size large
+Dot Plot
+\size default
+ : Cut vs Color
+\end_layout
+
+\begin_layout Standard
+Now, we are interested in the relationship between two categroical variables
+ 
+\series bold
+cut 
+\series default
+and 
+\series bold
+color
+\series default
+.
+ As these two variables are categorical, we can cross-tabulate the count
+ of these two variables and visualise the correlation between them using
+ the dot plot.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_count(mapping = aes(x = cut, y = color)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = "Dot plot between Cut and Color") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We notice that as the cut increases in quality, the count increases.
+ But that does not imply any kind of a correlation as the color range is
+ here in the direction of top to bottom.
+\end_layout
+
+\begin_layout Subsubsection*
+
+\size large
+Tile Graph
+\size default
+ : Cut vs Color
+\end_layout
+
+\begin_layout Standard
+Also, using a heatmap, we can visualise this information.
+ Here, dark blue indicates lower count and light blue indicates higher count
+ of the diamonds.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+diamonds %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  count(color, cut) %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  ggplot(aes(x = color, y = cut)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_tile(aes(fill = n)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Tile Graph between Cut and Color
+\begin_inset Quotes erd
+\end_inset
+
+) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now, we can clearly understand the covariance between two categorical variables.
+ Because as the value of the count increases, the light gets lighter.
+ Here, we see that the correlation between the cut and the quality is pretty
+ more balanced.
+ But there is not really a very clear correlation between the colors directly
+ with the cut.
+ If the cut has a low quality color, it does not really play much of a role
+ in the counts of a diamond.
+ But for the higher quality diamonds, the color 
+\series bold
+G
+\series default
+ and the surroundings have the more counts.
+\end_layout
+
+\begin_layout Subsubsection*
+
+\size large
+Tile Graph
+\size default
+ with the Descending Order of Count(n)
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+diamonds %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  count(color, cut) %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  ggplot(aes(x = color, y = cut)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_tile(aes(fill = desc(n))) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Tile Graph between Cut and Color
+\begin_inset Quotes erd
+\end_inset
+
+) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\shape italic
+\size large
+Continuous vs Continuous
+\end_layout
+
+\begin_layout Subsubsection*
+
+\size large
+Scatter Plot
+\size default
+ : Carat vs Price
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_point(mapping = aes(x = carat, y = price), alpha = (1/100)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Scatter Plot between Carat and Price
+\begin_inset Quotes erd
+\end_inset
+
+) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So,there is a clear correlation between the carat and the price of diamonds.
+ We see that as the carat increases, the price does increase and it increases
+ exponentially faster.
+\end_layout
+
+\begin_layout Subsubsection*
+
+\size large
+Scatter Plot
+\size default
+ : Carat vs Price (for the Smaller dataset)
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = smaller) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_bin2d(mapping = aes(x = carat, y = price)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Scatter Plot between Carat and Price
+\begin_inset Quotes erd
+\end_inset
+
+)+
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Adding Smoothed Trend
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA,message=F>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+options(warn=-1)
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds, aes(x = carat, y = price)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_point(alpha = (1/100)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_smooth() +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Scatter Plot between Carat and Price with Smoothed Trend
+\begin_inset Quotes erd
+\end_inset
+
+)+
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Fitting Some Linear Trend
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA,message=F>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+options(warn=-1)
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds, aes(x = carat, y = price)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_point(alpha = (1/100)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_smooth(method = "lm") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Fitting Some Linear Trend
+\begin_inset Quotes erd
+\end_inset
+
+)+
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We can see that the fiiting is not good.
+ Now, we are to transform both the variables carat and price to check whether
+ this linear trend is a good assumption or, not.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Fitting Linear Trend After Transforming Carat and Price
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA,message=F>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+options(warn=-1)
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds, aes(x = log(carat), y = log(price))) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_point(alpha = (1/100)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_smooth(method = "lm") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Fitting Some Linear Trend
+\begin_inset Quotes erd
+\end_inset
+
+)+
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now, this linear trend fitting is quite good.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+For the Smaller Dataset
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<echo=F,fig.height=4,fig.show='hold',comment=NA,message=F>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+options(warn=-1)
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = smaller, aes(x = log(carat), y = log(price))) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_bin2d() +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_smooth(method = "lm") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Fitting Some Linear Trend For Smaller Dataset
+\begin_inset Quotes erd
+\end_inset
+
+)+
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Conclusion :-
+\end_layout
+
+\begin_layout Itemize
+From the above exploratory data analysis, we can conclude that :-
+\end_layout
+
+\begin_layout Enumerate
+The 
+\series bold
+ideal
+\series default
+ cut is the most common and the 
+\series bold
+fair
+\series default
+ cut is less common one.
+\end_layout
+
+\begin_layout Enumerate
+Within each cut, 
+\series bold
+SI1
+\series default
+ and 
+\series bold
+VS2
+\series default
+ are the most common (highest percentage) clarity level.
+\end_layout
+
+\begin_layout Enumerate
+The diamonds from the color 
+\series bold
+G 
+\series default
+are the most ideal and premium quality diamonds.
+\end_layout
+
+\begin_layout Enumerate
+There is a clear correlation between the carat and the price of diamonds.
+\end_layout
+
+\begin_layout Enumerate
+The diamonds from the colors 
+\series bold
+F, G
+\series default
+ and 
+\series bold
+H 
+\series default
+are the fair cut diamonds.
+\end_layout
+
+\begin_layout Enumerate
+Also, all cut group diamonds are rare in colour 
+\series bold
+J
+\series default
+.
+\end_layout
+
+\begin_layout Subsection*
+R codes:-
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<eval=F>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+library(ggplot2)
+\end_layout
+
+\begin_layout Plain Layout
+
+library(tibble)
+\end_layout
+
+\begin_layout Plain Layout
+
+library(dplyr)
+\end_layout
+
+\begin_layout Plain Layout
+
+library(xtable)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+glimpse(diamonds)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+sum(is.na(diamonds))
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds,mapping = aes(x = cut)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_bar() +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_text(stat="count",aes(label=..count..), vjust = -1) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  ylim(0, 25000) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme(text = element_text(size=14)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_bar(fill = 'darkorange3') +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(x = "Quality of the Cut",
+\end_layout
+
+\begin_layout Plain Layout
+
+       y = "Diamonds Count",
+\end_layout
+
+\begin_layout Plain Layout
+
+       title = "Quality of the Diamonds") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_bw()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds,mapping = aes(x = color)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_bar() +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_text(stat="count",aes(label=..count..), vjust = -1) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  ylim(0, 15000) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme(text = element_text(size=14)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_bar(fill = 'darkblue') +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(x = "Color of the Diamonds",
+\end_layout
+
+\begin_layout Plain Layout
+
+       y = "Diamonds Count",
+\end_layout
+
+\begin_layout Plain Layout
+
+       title = "Color of the Diamonds") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_bw()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+library(ggplot2)
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds,mapping = aes(x = clarity)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_bar() +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_text(stat="count",aes(label=..count..), vjust = -1) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  ylim(0, 16000) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme(text = element_text(size=14)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_bar(fill = 'yellow') +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(x = "Clarity of Diamonds",
+\end_layout
+
+\begin_layout Plain Layout
+
+       y = "Diamonds Count",
+\end_layout
+
+\begin_layout Plain Layout
+
+       title = "Clarity of the Diamonds") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_bw()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+unique(diamonds$cut)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+levels(diamonds$clarity)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+diamonds %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  count(cut, clarity) %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  arrange(desc(n))
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_bar(mapping = aes(x = cut, fill = clarity), position = "dodge") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme(axis.text.x = element_text(angle = 45)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  scale_fill_brewer(palette="YlOrRd") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Histogram : Grouping by Cut and Clarity
+\begin_inset Quotes erd
+\end_inset
+
+) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_bw()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_bar(mapping = aes(x = cut, fill = clarity), position = "dodge") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Histogram : Grouping by Cut and Clarity
+\begin_inset Quotes erd
+\end_inset
+
+) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  scale_fill_brewer(palette="YlOrRd") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  coord_flip() +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_bw()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+co_cl <- diamonds %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  group_by(cut) %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  count(clarity) %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  mutate(percent = (n/sum(n)) * 100,
+\end_layout
+
+\begin_layout Plain Layout
+
+         label = sprintf("%0.0f%%", percent))
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  aes(x = cut, fill = clarity) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_bar(position = "fill") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_text(data=co_cl, aes(y=n,label=label),position=position_fill(vjust
+ = 0.5),
+\end_layout
+
+\begin_layout Plain Layout
+
+          size = 3) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  scale_fill_brewer(palette="GnBu") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(y = "Proportion",
+\end_layout
+
+\begin_layout Plain Layout
+
+       title = "Proportions of Clarity Within Cut")
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+round(prop.table(table(diamonds$cut, diamonds$clarity))*100, 2)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(diamonds, aes(x = cut)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_bar() +
+\end_layout
+
+\begin_layout Plain Layout
+
+  facet_wrap(~ clarity, strip.position = "top") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_histogram(mapping = aes(x = carat), binwidth = 0.5) +
+\end_layout
+
+\begin_layout Plain Layout
+
+   labs(title = "Histogram for Carat") +
+\end_layout
+
+\begin_layout Plain Layout
+
+   theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+diamonds %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  count(cut_width(carat, 0.5))
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+smaller <- diamonds %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  filter(carat < 3)
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = smaller) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_histogram(mapping = aes(x= carat), binwidth = 0.1) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Histogram : Carat for smaller dataset
+\begin_inset Quotes erd
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = smaller, mapping = aes(x = carat, color = cut)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_freqpoly(binwidth = 0.1) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Frequency Polygon for Carat vs Cut
+\begin_inset Quotes erd
+\end_inset
+
+) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data =  smaller, mapping = aes(x =  carat)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_histogram(binwidth = 0.01) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Histogram of Carat for Binwidth = 0.01
+\begin_inset Quotes erd
+\end_inset
+
+) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_bw()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(diamonds) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_histogram(mapping = aes(x = y), binwidth = 0.5) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(x = "Width of Diamonds",
+\end_layout
+
+\begin_layout Plain Layout
+
+       y = "Diamonds Count",
+\end_layout
+
+\begin_layout Plain Layout
+
+       title = "Histogram for the Width of the Diamonds") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+diamonds %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  filter(y < 3 | y > 20) %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  select(price, x, y, z) %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  arrange(y) %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  xtable()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+diamonds2 <- diamonds %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  filter(between(y, 3, 20))
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds2) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_histogram(mapping = aes(x = y), binwidth = 0.5) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(x = "Width of Diamonds",
+\end_layout
+
+\begin_layout Plain Layout
+
+       y = "Diamonds Count",
+\end_layout
+
+\begin_layout Plain Layout
+
+       title = 
+\begin_inset Quotes eld
+\end_inset
+
+Histogram of Width of a Diamond between 3 and 20
+\begin_inset Quotes erd
+\end_inset
+
+) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+diamonds %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  ggplot(aes(x = x, y = y)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_point() + 
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(x = "Length of Diamonds",
+\end_layout
+
+\begin_layout Plain Layout
+
+       y = "Width of Diamonds",
+\end_layout
+
+\begin_layout Plain Layout
+
+       title = 
+\begin_inset Quotes eld
+\end_inset
+
+Scatter Plot between the Length and the Width of a Diamond)
+\begin_inset Quotes erd
+\end_inset
+
+) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+diamonds %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  mutate(y = ifelse(y < 3 | y > 20, NA, y)) %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  ggplot(aes(x = x, y = y)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_point() + 
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(x = "Length of Diamonds",
+\end_layout
+
+\begin_layout Plain Layout
+
+       y = "Width of Diamonds",
+\end_layout
+
+\begin_layout Plain Layout
+
+       title = 
+\begin_inset Quotes eld
+\end_inset
+
+Scatter Plot between the Length and the Width of a Diamond)
+\begin_inset Quotes erd
+\end_inset
+
+) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds, aes(x = price)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_freqpoly(aes(color = cut), bindwidth = 500) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Frequency Polygon for Cut vs Price
+\begin_inset Quotes erd
+\end_inset
+
+) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds, aes(x = price)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_density(mapping = aes(fill = factor(cut)), binwidth = 500, alpha
+ = 0.4) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Density Plot for Cut vs Price
+\begin_inset Quotes erd
+\end_inset
+
+) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds, aes(x = cut, y = price)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_boxplot(fill = "lightgreen") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = "Box PLot of Price, grouped by Color") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds, aes(x = cut, y = price)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_boxplot(fill = "skyblue") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  coord_flip() +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = "Box PLotbox plot of Price, grouped by Cut") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_count(mapping = aes(x = cut, y = color)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = "Dot plot between Cut and Color") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+diamonds %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  count(color, cut) %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  ggplot(aes(x = color, y = cut)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_tile(aes(fill = n)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Tile Graph between Cut and Color
+\begin_inset Quotes erd
+\end_inset
+
+) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+diamonds %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  count(color, cut) %>%
+\end_layout
+
+\begin_layout Plain Layout
+
+  ggplot(aes(x = color, y = cut)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_tile(aes(fill = desc(n))) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Tile Graph between Cut and Color
+\begin_inset Quotes erd
+\end_inset
+
+) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_point(mapping = aes(x = carat, y = price), alpha = (1/100)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Scatter Plot between Carat and Price
+\begin_inset Quotes erd
+\end_inset
+
+) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = smaller) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_bin2d(mapping = aes(x = carat, y = price)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Scatter Plot between Carat and Price
+\begin_inset Quotes erd
+\end_inset
+
+)+
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds, aes(x = carat, y = price)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_point(alpha = (1/100)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_smooth() +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Scatter Plot between Carat and Price with Smoothed Trend
+\begin_inset Quotes erd
+\end_inset
+
+)+
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds, aes(x = carat, y = price)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_point(alpha = (1/100)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_smooth(method = "lm") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Fitting Some Linear Trend
+\begin_inset Quotes erd
+\end_inset
+
+)+
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = diamonds, aes(x = log(carat), y = log(price))) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_point(alpha = (1/100)) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_smooth(method = "lm") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Fitting Some Linear Trend
+\begin_inset Quotes erd
+\end_inset
+
+)+
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ggplot(data = smaller, aes(x = log(carat), y = log(price))) +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_bin2d() +
+\end_layout
+
+\begin_layout Plain Layout
+
+  geom_smooth(method = "lm") +
+\end_layout
+
+\begin_layout Plain Layout
+
+  labs(title = 
+\begin_inset Quotes eld
+\end_inset
+
+Fitting Some Linear Trend For Smaller Dataset
+\begin_inset Quotes erd
+\end_inset
+
+)+
+\end_layout
+
+\begin_layout Plain Layout
+
+  theme_minimal()
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
